@@ -1,0 +1,88 @@
+{
+  "name": "labs-angular-content-projection",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/labs-angular-content-projection/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/labs-angular-content-projection",
+        "index": "apps/labs-angular-content-projection/src/index.html",
+        "browser": "apps/labs-angular-content-projection/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/labs-angular-content-projection/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/labs-angular-content-projection/src/favicon.ico",
+          "apps/labs-angular-content-projection/src/assets"
+        ],
+        "styles": ["apps/labs-angular-content-projection/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "labs-angular-content-projection:build:production"
+        },
+        "development": {
+          "buildTarget": "labs-angular-content-projection:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "labs-angular-content-projection:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/labs-angular-content-projection/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "labs-angular-content-projection:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/labs-angular-content-projection/browser",
+        "spa": true
+      }
+    }
+  }
+}
