@@ -1,0 +1,9 @@
+<div class="title">
+  <ng-content select="app-card-title"></ng-content>
+</div>
+<div class="content">
+  <ng-content></ng-content>
+  @if(hasTemplate()){
+    <ng-container *ngTemplateOutlet="template(); "></ng-container>
+  }
+</div>
